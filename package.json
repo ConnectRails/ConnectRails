@@ -13,6 +13,7 @@
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.1.5",
     "@nuxtjs/tailwindcss": "^6.12.2",
+    "@sidebase/nuxt-auth": "^0.9.4",
     "@vue-hero-icons/outline": "^1.7.2",
     "mongoose": "^8.8.1",
     "nuxt": "^3.14.159",
