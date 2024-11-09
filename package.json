@@ -15,9 +15,13 @@
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@sidebase/nuxt-auth": "^0.9.4",
     "@vue-hero-icons/outline": "^1.7.2",
-    "mongoose": "^8.8.1",
+    "hash-wasm": "^4.11.0",
     "nuxt": "^3.14.159",
+    "nuxt-mongoose": "^1.0.6",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
   }
 }
