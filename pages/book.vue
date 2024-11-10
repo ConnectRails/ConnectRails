@@ -66,6 +66,7 @@
             class="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-center uppercase text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="XYZ"
             aria-label="Enter departure destination"
+            pattern="[A-Z]{3}"
             required
           />
         </div>
@@ -135,6 +136,7 @@
             class="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-center uppercase text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="ABC"
             aria-label="Enter arrival destination"
+            pattern="[A-Z]{3}"
             required
           />
         </div>
