@@ -18,7 +18,7 @@
           <a v-for="item in navigation" :key="item.name" :href="item.href" class="text-sm/6 font-semibold text-gray-800 hover:text-gray-600">{{ item.name }}</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" class="text-sm/6 font-semibold text-gray-800 hover:text-gray-600">Log in <span aria-hidden="true">&rarr;</span></a>
+          <router-link to="/login" class="text-sm/6 font-semibold text-gray-800 hover:text-gray-600">Log in <span aria-hidden="true">&rarr;</span></router-link>
         </div>
       </nav>
       <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -40,7 +40,7 @@
                 <a v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-800 hover:bg-gray-200">{{ item.name }}</a>
               </div>
               <div class="py-6">
-                <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-800 hover:bg-gray-200">Log in</a>
+                <router-link to="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-800 hover:bg-gray-200">Log in</router-link>
               </div>
             </div>
           </div>
@@ -54,7 +54,10 @@
           <h1 class="text-5xl font-semibold tracking-tight text-gray-800 sm:text-7xl">Want cheaper Amtrak tickets?</h1>
           <p class="mt-8 text-lg font-medium text-gray-600 sm:text-xl/8">We help match you with other passengers so you can always enjoy a group order discount!</p>
           <div class="mt-10 flex items-center justify-center gap-x-6">
-              <a href="#" class="rounded-md bg-gray-700 px-5 py-3 text-lg font-semibold text-white shadow-lg hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700">Book Now!</a>
+            <!-- Book Now button now uses router-link for internal navigation -->
+            <router-link to="/book" class="rounded-md bg-gray-700 px-5 py-3 text-lg font-semibold text-white shadow-lg hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700">
+              Book Now!
+            </router-link>
             <a href="#" class="text-sm/6 font-semibold text-gray-800 hover:text-gray-600">Learn more <span aria-hidden="true">→</span></a>
           </div>
         </div>
@@ -62,21 +65,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { Dialog, DialogPanel } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-
-const navigation = [
-  { name: 'Rides', href: '#' },
-  { name: 'Account', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-]
-
-const mobileMenuOpen = ref(false)
-</script>
-
-<style scoped> 
-</style>
