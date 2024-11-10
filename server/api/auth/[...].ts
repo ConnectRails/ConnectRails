@@ -26,7 +26,10 @@ export default NuxtAuthHandler({
         );
         if (!isValid) return null;
 
-        return user;
+        return {
+          name: user.firstName,
+          email: user.email,
+        };
       },
     }),
   ],

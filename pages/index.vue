@@ -1,4 +1,22 @@
+<script setup>
+import { ref } from "vue";
+import { Dialog, DialogPanel } from "@headlessui/vue";
+import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 
+const navigation = [
+  { name: "Rides", href: "#" },
+  { name: "Account", href: "#" },
+  { name: "History", href: "#" },
+  { name: "Contact Us", href: "#" },
+];
+
+const mobileMenuOpen = ref(false);
+
+const { status, data, lastRefreshedAt, getSession, signIn, signOut } =
+  useAuth();
+</script>
+
+<style scoped></style>
 
 <template>
   <div class="bg-gradient-to-b from-gray-200 to-gray-400">
@@ -9,7 +27,7 @@
       >
         <div class="flex lg:flex-1">
           <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only">Your Company</span>
+            <span class="sr-only">ConnectRails</span>
             <img class="h-20 w-auto" src="/logo.png" alt="" />
           </a>
         </div>
@@ -32,7 +50,10 @@
             >{{ item.name }}</a
           >
         </div>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end" v-if="data">
+          Hi {{ data.user.name }}!
+        </div>
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end" v-else>
           <router-link
             to="/signin"
             class="text-sm/6 font-semibold text-gray-800 hover:text-gray-600"
@@ -51,7 +72,7 @@
         >
           <div class="flex items-center justify-between">
             <a href="#" class="-m-1.5 p-1.5">
-              <span class="sr-only">Your Company</span>
+              <span class="sr-only">ConnectRails</span>
               <img class="h-8 w-auto" src="/logo.png" alt="" />
             </a>
             <button
@@ -74,7 +95,8 @@
                   >{{ item.name }}</a
                 >
               </div>
-              <div class="py-6">
+              <div class="py-6" v-if="data">Hi {{ data.user.name }}!</div>
+              <div class="py-6" v-else>
                 <router-link
                   to="/signin"
                   class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-800 hover:bg-gray-200"
@@ -119,21 +141,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { Dialog, DialogPanel } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-
-const navigation = [
-  { name: 'Rides', href: '#' },
-  { name: 'Account', href: '#' },
-  { name: 'History', href: '#' },
-  { name: 'Contact Us', href: '#' },
-]
-
-const mobileMenuOpen = ref(false)
-</script>
-
-<style scoped> 
-</style>
