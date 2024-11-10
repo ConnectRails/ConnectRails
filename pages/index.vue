@@ -50,13 +50,17 @@ const { status, data, lastRefreshedAt, getSession, signIn, signOut } =
             >{{ item.name }}</a
           >
         </div>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end" v-if="data">
-          Hi {{ data.user.name }}!
-        </div>
+          <router-link
+            v-if="data"
+            to="/profile"
+            class="hidden lg:flex lg:flex-1 lg:justify-end text-sm/6 font-semibold text-gray-800 hover:text-gray-600"
+          >
+            Hi {{ data.user.name }}!
+            </router-link>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end" v-else>
           <router-link
             to="/signin"
-            class="text-sm/6 font-semibold text-gray-800 hover:text-gray-600"
+            class="text-lg fond-serif font-semibold text-gray-800 hover:text-gray-600"
             >Log in <span aria-hidden="true">&rarr;</span></router-link
           >
         </div>
