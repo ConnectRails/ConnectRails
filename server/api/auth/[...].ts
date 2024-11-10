@@ -28,11 +28,29 @@ export default NuxtAuthHandler({
 
         return {
           name: user.firstName,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
         };
       },
     }),
   ],
+  callbacks: {
+    async jwt({ user, token }) {
+      if (user) {
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session && session.user) {
+        session.user.firstName = token.firstName;
+        session.user.lastName = token.lastName;
+      }
+      return session;
+    },
+  },
   pages: {
     signIn: "/signin",
   },

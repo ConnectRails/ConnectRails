@@ -9,11 +9,11 @@ const lastName = ref("");
 const handleSignUp = async () => {
   const message = apiRef({
     route: "/api/auth/register",
-    method: "post",
+    method: "put",
     defaultValue: null,
   });
   message.value = await $fetch("/api/auth/register", {
-    method: "POST",
+    method: "PUT",
     body: {
       firstName: firstName.value,
       lastName: lastName.value,
