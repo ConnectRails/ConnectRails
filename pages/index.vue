@@ -1,3 +1,5 @@
+
+
 <template>
   <div class="bg-gradient-to-b from-gray-200 to-gray-400">
     <header class="absolute inset-x-0 top-0 z-50">
@@ -117,3 +119,21 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { Dialog, DialogPanel } from '@headlessui/vue'
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+
+const navigation = [
+  { name: 'Rides', href: '#' },
+  { name: 'Account', href: '#' },
+  { name: 'History', href: '#' },
+  { name: 'Contact Us', href: '#' },
+]
+
+const mobileMenuOpen = ref(false)
+</script>
+
+<style scoped> 
+</style>
