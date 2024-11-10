@@ -274,7 +274,7 @@ const getFormattedDate = (date) => {
     : "";
 };
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   // Check if all required fields are filled
   if (
     !arrival.value.day ||
@@ -309,6 +309,22 @@ const handleSubmit = () => {
   console.log("Arrival Date:", arrivalDate);
   console.log("Departure Destination:", departureDestination.value);
   console.log("Arrival Destination:", arrivalDestination.value);
+
+  const message = apiRef({
+    route: "/api/schedule",
+    method: "get",
+    defaultValue: null,
+  });
+  message.value = await $fetch("/api/schedule", {
+    method: "GET",
+    query: {
+      origin: departureDestination.value,
+      destination: arrivalDestination.value,
+      startDate: departureDate,
+      endDate: arrivalDate,
+    },
+  });
+  console.log(message.value);
 };
 </script>
 
