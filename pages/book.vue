@@ -1,102 +1,104 @@
 <template>
-<header class="absolute inset-x-0 top-0 z-50">
-      <nav
-        class="flex items-center justify-between p-6 lg:px-8"
-        aria-label="Global"
+  <header class="absolute inset-x-0 top-0 z-50">
+    <nav
+      class="flex items-center justify-between p-6 lg:px-8"
+      aria-label="Global"
+    >
+      <div class="flex lg:flex-1">
+        <a href="#" class="-m-1.5 p-1.5">
+          <span class="sr-only">ConnectRails</span>
+          <img class="h-20 w-auto" src="/logo.png" alt="" />
+        </a>
+      </div>
+      <div class="flex lg:hidden">
+        <button
+          type="button"
+          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+          @click="mobileMenuOpen = true"
+        >
+          <span class="sr-only">Open main menu</span>
+          <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+        </button>
+      </div>
+      <div class="hidden lg:flex lg:gap-x-12">
+        <a
+          v-for="item in navigation"
+          :key="item.name"
+          :href="item.href"
+          class="text-sm/6 font-semibold text-gray-800 hover:text-gray-600"
+          >{{ item.name }}</a
+        >
+      </div>
+      <router-link
+        v-if="data"
+        to="/profile"
+        class="hidden lg:flex lg:flex-1 lg:justify-end text-sm/6 font-semibold text-gray-800 hover:text-gray-600"
       >
-        <div class="flex lg:flex-1">
+        Hi {{ data.user.name }}!
+      </router-link>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end" v-else>
+        <router-link
+          to="/signin"
+          class="text-lg fond-serif font-semibold text-gray-800 hover:text-gray-600"
+          >Log in <span aria-hidden="true">&rarr;</span></router-link
+        >
+      </div>
+    </nav>
+    <Dialog
+      class="lg:hidden"
+      @close="mobileMenuOpen = false"
+      :open="mobileMenuOpen"
+    >
+      <div class="fixed inset-0 z-50 bg-gray-800 bg-opacity-50" />
+      <DialogPanel
+        class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-100 px-6 py-6 sm:max-w-sm sm:ring-1 ring-gray-700"
+      >
+        <div class="flex items-center justify-between">
           <a href="#" class="-m-1.5 p-1.5">
             <span class="sr-only">ConnectRails</span>
-            <img class="h-20 w-auto" src="/logo.png" alt="" />
+            <img class="h-8 w-auto" src="/logo.png" alt="" />
           </a>
-        </div>
-        <div class="flex lg:hidden">
           <button
             type="button"
-            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-            @click="mobileMenuOpen = true"
+            class="-m-2.5 rounded-md p-2.5 text-gray-700"
+            @click="mobileMenuOpen = false"
           >
-            <span class="sr-only">Open main menu</span>
-            <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+            <span class="sr-only">Close menu</span>
+            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <div class="hidden lg:flex lg:gap-x-12">
-          <a
-            v-for="item in navigation"
-            :key="item.name"
-            :href="item.href"
-            class="text-sm/6 font-semibold text-gray-800 hover:text-gray-600"
-            >{{ item.name }}</a
-          >
-        </div>
-          <router-link
-            v-if="data"
-            to="/profile"
-            class="hidden lg:flex lg:flex-1 lg:justify-end text-sm/6 font-semibold text-gray-800 hover:text-gray-600"
-          >
-            Hi {{ data.user.name }}!
-            </router-link>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end" v-else>
-          <router-link
-            to="/signin"
-            class="text-lg fond-serif font-semibold text-gray-800 hover:text-gray-600"
-            >Log in <span aria-hidden="true">&rarr;</span></router-link
-          >
-        </div>
-      </nav>
-      <Dialog
-        class="lg:hidden"
-        @close="mobileMenuOpen = false"
-        :open="mobileMenuOpen"
-      >
-        <div class="fixed inset-0 z-50 bg-gray-800 bg-opacity-50" />
-        <DialogPanel
-          class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-100 px-6 py-6 sm:max-w-sm sm:ring-1 ring-gray-700"
-        >
-          <div class="flex items-center justify-between">
-            <a href="#" class="-m-1.5 p-1.5">
-              <span class="sr-only">ConnectRails</span>
-              <img class="h-8 w-auto" src="/logo.png" alt="" />
-            </a>
-            <button
-              type="button"
-              class="-m-2.5 rounded-md p-2.5 text-gray-700"
-              @click="mobileMenuOpen = false"
-            >
-              <span class="sr-only">Close menu</span>
-              <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-          <div class="mt-6 flow-root">
-            <div class="-my-6 divide-y divide-gray-300">
-              <div class="space-y-2 py-6">
-                <a
-                  v-for="item in navigation"
-                  :key="item.name"
-                  :href="item.href"
-                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-800 hover:bg-gray-200"
-                  >{{ item.name }}</a
-                >
-              </div>
-              <div class="py-6" v-if="data">Hi {{ data.user.name }}!</div>
-              <div class="py-6" v-else>
-                <router-link
-                  to="/signin"
-                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-800 hover:bg-gray-200"
-                >
-                  Log in
-                </router-link>
-              </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-300">
+            <div class="space-y-2 py-6">
+              <a
+                v-for="item in navigation"
+                :key="item.name"
+                :href="item.href"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-800 hover:bg-gray-200"
+                >{{ item.name }}</a
+              >
+            </div>
+            <div class="py-6" v-if="data">Hi {{ data.user.name }}!</div>
+            <div class="py-6" v-else>
+              <router-link
+                to="/signin"
+                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-800 hover:bg-gray-200"
+              >
+                Log in
+              </router-link>
             </div>
           </div>
-        </DialogPanel>
-      </Dialog>
-    </header>
+        </div>
+      </DialogPanel>
+    </Dialog>
+  </header>
   <div class="p-6 bg-white rounded-lg shadow-md">
     <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0">
       <!-- Arrival Date Picker -->
       <div class="flex-1">
-        <label class="min-height-28 font-serif block text-lg font-medium text-gray-700 mb-2">
+        <label
+          class="min-height-28 font-serif block text-lg font-medium text-gray-700 mb-2"
+        >
           Arrival
         </label>
         <div class="flex space-x-2">
@@ -108,7 +110,9 @@
             required
           >
             <option disabled value="">Day</option>
-            <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
+            <option v-for="day in days" :key="day" :value="day">
+              {{ day }}
+            </option>
           </select>
           <select
             v-model="arrival.month"
@@ -118,7 +122,13 @@
             required
           >
             <option disabled value="">Month</option>
-            <option v-for="(month, index) in months" :key="month" :value="index + 1">{{ month }}</option>
+            <option
+              v-for="(month, index) in months"
+              :key="month"
+              :value="index + 1"
+            >
+              {{ month }}
+            </option>
           </select>
           <select
             v-model="arrival.year"
@@ -128,14 +138,20 @@
             required
           >
             <option disabled value="">Year</option>
-            <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+            <option v-for="year in years" :key="year" :value="year">
+              {{ year }}
+            </option>
           </select>
         </div>
-        <p class="mt-2 text-sm text-gray-600">{{ getFormattedDate(arrival) }}</p>
+        <p class="mt-2 text-sm text-gray-600">
+          {{ getFormattedDate(arrival) }}
+        </p>
 
         <!-- Arrival Destination Input -->
         <div class="mt-4">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Arrival Destination</label>
+          <label class="block text-sm font-medium text-gray-700 mb-1"
+            >Arrival Destination</label
+          >
           <input
             v-model="arrivalDestination"
             maxlength="3"
@@ -149,7 +165,9 @@
 
       <!-- Departure Date Picker -->
       <div class="flex-1">
-        <label class="min-height-28 font-serif block text-lg font-medium text-gray-700 mb-2">
+        <label
+          class="min-height-28 font-serif block text-lg font-medium text-gray-700 mb-2"
+        >
           Departure
         </label>
         <div class="flex space-x-2">
@@ -161,7 +179,9 @@
             required
           >
             <option disabled value="">Day</option>
-            <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
+            <option v-for="day in days" :key="day" :value="day">
+              {{ day }}
+            </option>
           </select>
           <select
             v-model="departure.month"
@@ -171,7 +191,13 @@
             required
           >
             <option disabled value="">Month</option>
-            <option v-for="(month, index) in months" :key="month" :value="index + 1">{{ month }}</option>
+            <option
+              v-for="(month, index) in months"
+              :key="month"
+              :value="index + 1"
+            >
+              {{ month }}
+            </option>
           </select>
           <select
             v-model="departure.year"
@@ -181,14 +207,20 @@
             required
           >
             <option disabled value="">Year</option>
-            <option v-for="year in years" :key="year" :value="year">{{ year }}</option>
+            <option v-for="year in years" :key="year" :value="year">
+              {{ year }}
+            </option>
           </select>
         </div>
-        <p class="mt-2 text-sm text-gray-600">{{ getFormattedDate(departure) }}</p>
+        <p class="mt-2 text-sm text-gray-600">
+          {{ getFormattedDate(departure) }}
+        </p>
 
         <!-- Departure Destination Input -->
         <div class="mt-4">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Departure Destination</label>
+          <label class="block text-sm font-medium text-gray-700 mb-1"
+            >Departure Destination</label
+          >
           <input
             v-model="departureDestination"
             maxlength="3"
@@ -214,87 +246,110 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+definePageMeta({
+  middleware: "auth",
+  auth: {
+    unauthenticatedOnly: false,
+    navigateUnauthenticatedTo: "/signin",
+  },
+});
+
+import { ref } from "vue";
 
 const today = new Date();
 
 const handleArrivalChange = (field, value) => {
   arrival.value[field] = value;
-  if (arrival.value.day && arrival.value.month && arrival.value.year && !isFutureOrToday(arrival.value)) {
+  if (
+    arrival.value.day &&
+    arrival.value.month &&
+    arrival.value.year &&
+    !isFutureOrToday(arrival.value)
+  ) {
     alert("Arrival date cannot be in the past.");
-    arrival.value[field] = '';
+    arrival.value[field] = "";
   }
-}
+};
 
 const handleDepartureChange = (field, value) => {
   departure.value[field] = value;
   if (departure.value.day && departure.value.month && departure.value.year) {
     if (!isFutureOrToday(departure.value)) {
       alert("Departure date cannot be in the past.");
-      departure.value[field] = '';
+      departure.value[field] = "";
     } else if (!isValidDepartureDate()) {
       alert("Departure date must be after the arrival date.");
-      departure.value[field] = '';
+      departure.value[field] = "";
     }
   }
-}
+};
 
 const isFutureOrToday = (date) => {
   if (!date.day || !date.month || !date.year) return true;
   const selectedDate = new Date(
     parseInt(date.year),
     parseInt(date.month) - 1,
-    parseInt(date.day)
+    parseInt(date.day),
   );
   return selectedDate >= today;
-}
+};
 
 const isValidDepartureDate = () => {
-  if (!arrival.value.day || !arrival.value.month || !arrival.value.year) return true;
+  if (!arrival.value.day || !arrival.value.month || !arrival.value.year)
+    return true;
   const arrivalDate = new Date(
     parseInt(arrival.value.year),
     parseInt(arrival.value.month) - 1,
-    parseInt(arrival.value.day)
+    parseInt(arrival.value.day),
   );
   const departureDate = new Date(
     parseInt(departure.value.year),
     parseInt(departure.value.month) - 1,
-    parseInt(departure.value.day)
+    parseInt(departure.value.day),
   );
   return departureDate >= arrivalDate;
-}
+};
 
 const arrival = ref({
-  day: '',
-  month: '',
-  year: ''
-})
+  day: "",
+  month: "",
+  year: "",
+});
 
 const departure = ref({
-  day: '',
-  month: '',
-  year: ''
-})
+  day: "",
+  month: "",
+  year: "",
+});
 
-const arrivalDestination = ref('')
-const departureDestination = ref('')
+const arrivalDestination = ref("");
+const departureDestination = ref("");
 
-const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString())
+const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
 const months = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-]
-const currentYear = new Date().getFullYear()
-const years = Array.from(
-  { length: 201 },
-  (_, i) => (currentYear - 100 + i).toString()
-)
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const currentYear = new Date().getFullYear();
+const years = Array.from({ length: 201 }, (_, i) =>
+  (currentYear - 100 + i).toString(),
+);
 
 const getFormattedDate = (date) => {
   return date.day && date.month && date.year
     ? `${months[parseInt(date.month) - 1]} ${date.day}, ${date.year}`
-    : ''
-}
+    : "";
+};
 
 const handleSubmit = () => {
   // Check if all required fields are filled
@@ -308,26 +363,30 @@ const handleSubmit = () => {
     !arrivalDestination.value ||
     !departureDestination.value
   ) {
-    alert("Please fill in all required fields.")
-    return
+    alert("Please fill in all required fields.");
+    return;
   }
 
   const arrivalDate = new Date(
     parseInt(arrival.value.year),
     parseInt(arrival.value.month) - 1,
-    parseInt(arrival.value.day)
-  ).toISOString().split(".")[0]
+    parseInt(arrival.value.day),
+  )
+    .toISOString()
+    .split(".")[0];
   const departureDate = new Date(
     parseInt(departure.value.year),
     parseInt(departure.value.month) - 1,
-    parseInt(departure.value.day)
-  ).toISOString().split(".")[0]
+    parseInt(departure.value.day),
+  )
+    .toISOString()
+    .split(".")[0];
 
-  console.log('Arrival Date:', arrivalDate)
-  console.log('Departure Date:', departureDate)
-  console.log('Arrival Destination:', arrivalDestination.value)
-  console.log('Departure Destination:', departureDestination.value)
-}
+  console.log("Arrival Date:", arrivalDate);
+  console.log("Departure Date:", departureDate);
+  console.log("Arrival Destination:", arrivalDestination.value);
+  console.log("Departure Destination:", departureDestination.value);
+};
 </script>
 
 <style>
@@ -338,7 +397,9 @@ body {
 
 /* Smooth shadow effect on the main container */
 .shadow-md {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .backdrop-filter {
